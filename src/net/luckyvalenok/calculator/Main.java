@@ -30,18 +30,13 @@ public class Main {
                 result = Double.parseDouble(blocks[0]);
                 for (int i = 1; i < blocks.length - 1; i += 2) {
                     String operator = blocks[i];
-                    double aDouble = 0;
-                    try {
-                        result = calculate(result, aDouble, operator);
-                    } catch (Exception exception) {
-                        error = exception.getMessage();
-                        break;
-                    }
+                    double aDouble = Double.parseDouble(blocks[i + 1]);
+                    result = calculate(result, aDouble, operator);
                 }
-            } catch (NumberFormatException exception) {
+            } catch (Exception exception) {
                 error = "В примере ошибка. " + exception.getMessage();
             }
-            
+    
             FileWriter output = new FileWriter("output.txt");
             output.write(error.isEmpty() ? String.valueOf(result) : error);
             output.close();
