@@ -24,21 +24,21 @@ public class Main {
                 .toArray(String[]::new);
             fileReader.close();
             
-            String error = "";
-            double result = 0;
+            String stringResult;
             try {
-                result = Double.parseDouble(blocks[0]);
+                double result = Double.parseDouble(blocks[0]);
                 for (int i = 1; i < blocks.length - 1; i += 2) {
                     String operator = blocks[i];
                     double aDouble = Double.parseDouble(blocks[i + 1]);
                     result = calculate(result, aDouble, operator);
                 }
+                stringResult = String.valueOf(result);
             } catch (Exception exception) {
-                error = "В примере ошибка. " + exception.getMessage();
+                stringResult = "В примере ошибка. " + exception.getMessage();
             }
     
             FileWriter output = new FileWriter("output.txt");
-            output.write(error.isEmpty() ? String.valueOf(result) : error);
+            output.write(stringResult);
             output.close();
         } else {
             System.out.println("Отсутствует пример");
